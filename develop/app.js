@@ -4,26 +4,21 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const Employee = require("./lib/Employee");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const employeeList = [];
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 
-
-// first you need a function to ask for the position they are in.
-
-// then based on the answer, a different prompt will appear with specific questions pertinent to the position they are in.
-
-
-
-function promputUser() {
-    return inquirer.prompt([
+function promptUser() {
+    inquirer.prompt([
         {
         type: "input",
         name: "name",
@@ -31,52 +26,76 @@ function promputUser() {
         },
         {
         type: "input",
-        name: "name",
+        name: "id",
         message: "What is your ID number?"
         },
         {
         type: "input",
-        name: "name",
+        name: "email",
         message: "What is your email?"
         },
         {
-        type: "input",
+        type: "list",
         name: "role",
-        message: "What is your role? Please enter Manager, Intern, or Engineer."
+        message: "What is your role?",
+        choices: ["Manager", "Intern", "Engineer"]
         }
-    ]);
-    if(message === "Manager"){
-        function managerPrompt(){
-            return inquirer.prompt([
-                {
-                type: "input",
-                name: "office",
-                message: "What is your office number?"
-                }
-            ])
+    ]).then(answers => {
+        if(answers.role === "Manager"){
+            managerPrompt(answers);
+        }else if(answers.role === "Engineer"){
+            engineerPrompt(answers);
+        }else{
+            internPrompt(answers);
+        };
+    })
+}
+
+function managerPrompt(userInput){
+    inquirer.prompt([
+        {
+        type: "input",
+        name: "office",
+        message: "What is your office number?"
         }
-    }else if(message === "Intern"){
-        function internPrompt(){
-            return inquirer.prompt([
-                {
-                type: "input",
-                name: "school",
-                message: "What school are you currently attending?"
-                }
-            ])
-        }
-    }else{
-        function internPrompt(){
-            return inquirer.prompt([
-                {
-                type: "input",
-                name: "github",
-                message: "What is your GitHub username?"
-                }
-            ])
-        }
-    };
+    ]).then(answers => {
+        const newManager = new Manager(userInput.name, userInput.id, userInput.email, answers.office)
+        employeeList.push(newManager);
+        console.log(employeeList);
+    })
 };
+
+function engineerPrompt(userInput){
+    inquirer.prompt([
+        {
+        type: "input",
+        name: "github",
+        message: "What is your GitHub username?"
+        }
+    ]).then(answers => {
+        const newEngineer = new Engineer(userInput.name, userInput.id, userInput.email, answers.github);
+        employeeList.push(newEngineer);
+        console.log(employeeList);
+    })
+};
+
+function internPrompt(userInput){
+    inquirer.prompt([
+        {
+        type: "input",
+        name: "school",
+        message: "What school are you currently attending?"
+        }
+    ]).then(answers => {
+        const newIntern = new Intern(userInput.name, userInput.id, userInput.email, answers.school);
+        employeeList.push(newIntern);
+        console.log(employeeList);
+    })
+};
+
+promptUser();
+
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
