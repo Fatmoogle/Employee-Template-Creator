@@ -11,12 +11,19 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+// Empty array to hold the employee information
 const employeeList = [];
 
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
+// Function to create a file when called
+function writeFile(fileName, data) {
+    fs.writeFile(fileName, data, (err) => {
+        if(err) throw err;
+    });
+}
 
-
+// Function to initialize the inquirer prompt and ask the needed questions
+// Depending on what role they are,
+// the if/else statements will control what question is asked last
 function promptUser() {
     inquirer.prompt([
         {
@@ -51,6 +58,7 @@ function promptUser() {
     })
 }
 
+// Function to create a Manager specific layout
 function managerPrompt(userInput){
     inquirer.prompt([
         {
@@ -62,9 +70,11 @@ function managerPrompt(userInput){
         const newManager = new Manager(userInput.name, userInput.id, userInput.email, answers.office)
         employeeList.push(newManager);
         console.log(employeeList);
+        writeFile(outputPath, render(employeeList));
     })
 };
 
+// Function to create a Engineer specific layout
 function engineerPrompt(userInput){
     inquirer.prompt([
         {
@@ -76,9 +86,11 @@ function engineerPrompt(userInput){
         const newEngineer = new Engineer(userInput.name, userInput.id, userInput.email, answers.github);
         employeeList.push(newEngineer);
         console.log(employeeList);
+        writeFile(outputPath, render(employeeList));
     })
 };
 
+// Function to create a Intern specific layout
 function internPrompt(userInput){
     inquirer.prompt([
         {
@@ -90,9 +102,11 @@ function internPrompt(userInput){
         const newIntern = new Intern(userInput.name, userInput.id, userInput.email, answers.school);
         employeeList.push(newIntern);
         console.log(employeeList);
+        writeFile(outputPath, render(employeeList));
     })
 };
 
+// Function to start the application
 promptUser();
 
 
