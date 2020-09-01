@@ -21,6 +21,24 @@ function writeFile(fileName, data) {
     });
 }
 
+function beginApp() {
+    inquirer.prompt([
+        {
+        type: "list",
+        name: "begin",
+        message: "Hello! Welcome to my Employee Template Generator Application.",
+        choices: ["Add Employee", "Quit"]
+        }
+    ]).then(answers => {
+        if(answers.begin === "Add Employee"){
+            promptUser();
+        }else{
+            console.log("Goodbye!")
+        };
+    })
+}
+
+
 // Function to initialize the inquirer prompt and ask the needed questions
 // Depending on what role they are,
 // the if/else statements will control what question is asked last
@@ -70,7 +88,7 @@ function managerPrompt(userInput){
         const newManager = new Manager(userInput.name, userInput.id, userInput.email, answers.office)
         employeeList.push(newManager);
         console.log(employeeList);
-        writeFile(outputPath, render(employeeList));
+        addAnother();
     })
 };
 
@@ -86,7 +104,7 @@ function engineerPrompt(userInput){
         const newEngineer = new Engineer(userInput.name, userInput.id, userInput.email, answers.github);
         employeeList.push(newEngineer);
         console.log(employeeList);
-        writeFile(outputPath, render(employeeList));
+        addAnother();
     })
 };
 
@@ -102,13 +120,29 @@ function internPrompt(userInput){
         const newIntern = new Intern(userInput.name, userInput.id, userInput.email, answers.school);
         employeeList.push(newIntern);
         console.log(employeeList);
-        writeFile(outputPath, render(employeeList));
+        addAnother();
     })
 };
 
-// Function to start the application
-promptUser();
+function addAnother(userInput){
+    inquirer.prompt([
+        {
+        type: "list",
+        name: "add",
+        message: "What would like to do?",
+        choices: ["Add another", "Finish and generate HTML"]
+        }
+    ]).then(answers => {
+        if(answers.add === "Add another"){
+            promptUser();
+        }else{
+            writeFile(outputPath, render(employeeList));
+        }
+    })
+}
 
+// Function to start the application
+beginApp();
 
 
 // After the user has input all employees desired, call the `render` function (required
