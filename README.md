@@ -1,9 +1,21 @@
 # Employee Template Generator
 
+![](Assets/Images/intro.PNG)
+
+![](Assets/Images/welcome.PNG)
+
+![](Assets/Images/functions.PNG)
+
 
 ## Description 
 
 This application will allow users to navigate and user friendly UI in order to add employee information that will then be generated into an HTML file with the information that was taken.
+
+![](Assets/Images/node.PNG)
+
+![](Assets/Images/htmlFile.PNG)
+
+
 
 
 ## Table of Contents 
