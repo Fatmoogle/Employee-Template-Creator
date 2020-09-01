@@ -1,19 +1,19 @@
 # Employee Template Generator
 
-![](Assets/Images/intro.PNG)
+![](assets/Images/intro.PNG)
 
-![](Assets/Images/welcome.PNG)
+![](assets/Images/welcome.PNG)
 
-![](Assets/Images/functions.PNG)
+![](assets/Images/functions.PNG)
 
 
 ## Description 
 
 This application will allow users to navigate and user friendly UI in order to add employee information that will then be generated into an HTML file with the information that was taken.
 
-![](Assets/Images/node.PNG)
+![](assets/Images/node.PNG)
 
-![](Assets/Images/htmlFile.PNG)
+![](assets/Images/htmlFile.PNG)
 
 
 
@@ -60,7 +60,7 @@ You are free to use this code for its intended purpose, for studying and educati
 
 Open the integrated terminal in the same file path and type in "npm run test".
 
-![](Assets/Images/test.PNG)
+![](assets/Images/test.PNG)
 
 ## Questions
 
