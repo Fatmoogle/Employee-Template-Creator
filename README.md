@@ -60,6 +60,7 @@ You are free to use this code for its intended purpose, for studying and educati
 
 Open the integrated terminal in the same file path and type in "npm run test".
 
+![](Assets/Images/test.PNG)
 
 ## Questions
 
