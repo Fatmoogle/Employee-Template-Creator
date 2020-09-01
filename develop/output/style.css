@@ -1,0 +1,15 @@
+.jumbotron {
+    background-color: rgb(180, 174, 174);
+}
+
+.card-header {
+    background-color: rgb(185, 214, 224)
+}
+
+@media (max-width: 800px) {
+    .team-area {
+        flex-direction: column;
+        gap: 2em;
+        font-size: 25px;
+    }
+}

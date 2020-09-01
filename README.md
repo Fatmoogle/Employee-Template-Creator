@@ -15,6 +15,7 @@ This application will allow users to navigate and user friendly UI in order to a
 
 ![](assets/Images/htmlFile.PNG)
 
+![](assets/Images/myTeam.PNG)
 
 
 
